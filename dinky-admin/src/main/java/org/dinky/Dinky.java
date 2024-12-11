@@ -37,11 +37,14 @@ import lombok.SneakyThrows;
  * @since 2021/5/28
  */
 @EnableTransactionManagement
+// 移除FreeMarker 模板引擎
 @SpringBootApplication(exclude = FreeMarkerAutoConfiguration.class)
 @EnableCaching
 public class Dinky {
 
     static {
+        // Log4j 2 提供了 ThreadContext（类似于 MDC，Mapped Diagnostic Context），用于在日志中附加一些与当前线程相关的上下文信息。例如，用户 ID、请求 ID 等。
+        // 默认情况下，ThreadContext 中的数据是线程本地的（Thread-local），即它们在当前线程内有效，但不会被子线程继承。
         System.setProperty("log4j2.isThreadContextMapInheritable", "true");
     }
 
